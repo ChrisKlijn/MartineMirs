@@ -22,14 +22,15 @@ sampleInfo <- read.delim("sample overview.txt",
 hybInfo <- read.delim("Hybridization.txt", 
   header = TRUE,  sep = "\t",  stringsAsFactors = FALSE)
 
-# use probeID rownames and remove the MiR column 
-# from the measurement data.
+# remove the MiR column from the measurement data.
+# Add unique probe IDs 
 # Check if the probes are in the same order before doing so
 
 all.equal(measureData$MiR, probeInfo$description)
 
 measureData <- as.matrix(measureData[,-1])
-row.names(measureData) <- probeInfo$reporterID
+row.names(measureData) <- paste('probe', seq(1, nrow(measureData)))
+row.names(probeInfo) <- paste('probe', seq(1, nrow(probeInfo)))
 
 # Remove _S01 from data column names
 colnames(measureData) <- gsub('_S01', '', colnames(measureData))

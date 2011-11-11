@@ -22,6 +22,15 @@ sampleInfo <- read.delim("sample overview.txt",
 hybInfo <- read.delim("Hybridization.txt", 
   header = TRUE,  sep = "\t",  stringsAsFactors = FALSE)
 
+# use probeID rownames and remove the MiR column 
+# from the measurement data.
+# Check if the probes are in the same order before doing so
+
+all.equal(measureData$MiR, probeInfo$description)
+
+measureData <- as.matrix(measureData[,-1])
+row.names(measureData) <- probeInfo$reporterID
+
 # Split the Sample.name..user field into two separate fields
 sampleInfo$type <- gsub('[0-9]{6}[ ]{1}' ,'', 
   sampleInfo$Sample.name..user.)

@@ -31,6 +31,9 @@ all.equal(measureData$MiR, probeInfo$description)
 measureData <- as.matrix(measureData[,-1])
 row.names(measureData) <- probeInfo$reporterID
 
+# Remove _S01 from data column names
+colnames(measureData) <- gsub('_S01', '', colnames(measureData))
+
 # Split the Sample.name..user field into two separate fields
 sampleInfo$type <- gsub('[0-9]{6}[ ]{1}' ,'', 
   sampleInfo$Sample.name..user.)

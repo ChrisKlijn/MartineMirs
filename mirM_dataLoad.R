@@ -22,5 +22,17 @@ sampleInfo <- read.delim("sample overview.txt",
 hybInfo <- read.delim("Hybridization.txt", 
   header = TRUE,  sep = "\t",  stringsAsFactors = FALSE)
 
+# Split the Sample.name..user field into two separate fields
+sampleInfo$type <- gsub('[0-9]{6}[ ]{1}' ,'', 
+  sampleInfo$Sample.name..user.)
+sampleInfo$animalID <- 
+  as.numeric(strtrim(sampleInfo$Sample.name..user., 6))
+
+# add sample info to the hybridization info
+hybInfo$sampleAnimal <- sampleInfo$animalID[hybInfo$Sample]
+hybInfo$sampleType <- sampleInfo$type[hybInfo$Sample]
+hybInfo$refAnimal <- sampleInfo$animalID[hybInfo$Reference.sample]
+hybInfo$refType <- sampleInfo$type[hybInfo$Reference.sample]
+
 save(file='mirM_rawData.Rda', 
   list=c('measureData', 'probeInfo', 'sampleInfo', 'hybInfo'))

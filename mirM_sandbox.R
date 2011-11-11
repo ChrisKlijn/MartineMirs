@@ -5,3 +5,10 @@
 # Description: Sandbox code
 # -------------------------------------------------------------------
 
+# Change these to the local directories
+# Directories shown are mediod dirs
+dataDir <- '~/data/smallproj/martineMir/'
+codeDir <- '~/gitCodeChris/MartineMirs/'
+
+setwd(dataDir)
+

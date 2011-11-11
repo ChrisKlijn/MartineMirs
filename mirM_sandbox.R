@@ -1,7 +1,7 @@
-# mirM_functions.R
+# mirM_sandbox.R
 # -------------------------------------------------------------------
 # Copyright 2011 Christiaan Klijn <c.klijn@gmail.com>
 # Project: microRNA analyses Martine
-# Description: Functions for project
+# Description: Sandbox code
 # -------------------------------------------------------------------
 

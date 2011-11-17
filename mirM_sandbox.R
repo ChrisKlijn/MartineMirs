@@ -6,10 +6,11 @@
 # -------------------------------------------------------------------
 
 # To Do
-# Use SAM to find significant miRs
-# Find optimal delta
 # define comparison groups
 # eliminate non-variant mirs
+# code to plot SAM plot and a heatmap of the significant probes
+# see if replicate probes are present in the list
+
 
 # Change these to the local directories
 # Directories shown are mediod dirs

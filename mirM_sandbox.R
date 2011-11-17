@@ -22,9 +22,6 @@ source(paste(codeDir, 'mirM_functions.R', sep=''))
 # Use the siggenes library for the sam analysis
 library(siggenes)
 
-# Functions
-
-
 # Load data
 load('mirM_rawData.Rda')
 
@@ -34,8 +31,7 @@ load('mirM_rawData.Rda')
 arrayLung <- subset(hybInfo, sampleType == 'Lung met')$Array
 arrayNonLung <- subset(hybInfo, sampleType != 'Lung met')$Array
 
-lungSam <- sam(measureData, colnames(measureData) %in% arrayLung)
-lungDelta <- findMinDelta(lungSam)
-lungSamSummary <- summary(lungSam, delta=lungDelta)
-lungSamProbes <- probeInfo[lungSamSummary@row.sig.genes,]
+lungResults <- doMirSamAnalysis(arrayLung, arrayNonLung, 
+  measureData, probeInfo)
+
 

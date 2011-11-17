@@ -21,7 +21,8 @@ setwd(dataDir)
 # Source functions
 source(paste(codeDir, 'mirM_functions.R', sep=''))
 # Use the siggenes library for the sam analysis
-library(siggenes)
+library(siggenes) # SAM
+library(gplots) # for heatmap.2
 
 # Load data
 load('mirM_rawData.Rda')
@@ -34,5 +35,5 @@ arrayNonLung <- subset(hybInfo, sampleType != 'Lung met')$Array
 
 lungResults <- doMirSamAnalysis(arrayLung, arrayNonLung, 
   measureData, probeInfo)
-
+plotSamFigures(lungResults, measureData)
 

@@ -31,7 +31,8 @@ doMirSamAnalysis <- function(array1, array2,
   # Merge samProbes and samSummary@mat.sig
 
   # Run SAM, array1 is 1, array2 is 0 in the class vector
-  samResult <- sam(measureData, colnames(measureData) %in% array1)
+  classVect <- colnames(measureData) %in% array1
+  samResult <- sam(measureData, classVect)
   sigDelta <- findMinDelta(samResult)
   samSummary <- summary(samResult, delta=sigDelta)
   samProbes <- probeInfo[samSummary@row.sig.genes,]
@@ -60,12 +61,19 @@ plotSamFigures <- function(samList, measureData,
   # Plots SAM plot and a heatmap into a pdf file
   # input is a samResult list
 
-  plotFile <- paste(dirName, fileName, '.pdf', )
+  plotFile <- paste(dirName, fileName, '.pdf', sep='')
 
-  pdf(file=plotFile, width=5, height=5)
+  pdf(file=plotFile, width=10, height=10)
 
   plot(samList$samResult, samList$delta)
 
-    
+  heatCols <- colorpanel(256, low='blue', high='yellow')
+  classCol <- colors()[c(134, 29)]
+
+  heatmap.2(measureData[rownames(samList$samProbes),], 
+    scale='none', trace='none',
+    col=heatCols, margin=c(7,10))
+  
+  dev.off()
 }
 

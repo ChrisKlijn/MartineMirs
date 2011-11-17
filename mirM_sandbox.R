@@ -24,6 +24,7 @@ library(siggenes)
 
 # Functions
 
+
 # Load data
 load('mirM_rawData.Rda')
 
@@ -34,6 +35,7 @@ arrayLung <- subset(hybInfo, sampleType == 'Lung met')$Array
 arrayNonLung <- subset(hybInfo, sampleType != 'Lung met')$Array
 
 lungSam <- sam(measureData, colnames(measureData) %in% arrayLung)
-lungSamSummary <- summary(lungSam, delta=1.2)
-
+lungDelta <- findMinDelta(lungSam)
+lungSamSummary <- summary(lungSam, delta=lungDelta)
+lungSamProbes <- probeInfo[lungSamSummary@row.sig.genes,]
 

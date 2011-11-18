@@ -14,5 +14,5 @@ The function of the scripts:
 ##Running the scripts
 Required to run the scripts is a working R installation with the packages `gplots` and `siggenes` installed.
 
-To start, put the data and the code in separate folders. In the data folder, create two subfolders: `Figures` and `Tables`. Adjust the `dataDir` and `dataDir` variables in all scripts to these locations on your own machine.
+To start, put the data and the code in separate folders. In the data folder, create two subfolders: Figures and Tables. Adjust the `dataDir` and `dataDir` variables in all scripts to these locations on your own machine.
 

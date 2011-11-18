@@ -30,8 +30,8 @@ doMirSamAnalysis <- function(array1, array2,
   # To Do:
   # Merge samProbes and samSummary@mat.sig
 
-  # Run SAM, array1 is 1, array2 is 0 in the class vector
-  classVect <- colnames(measureData) %in% array1
+  # Run SAM, array1 is 0, array2 is 1 in the class vector
+  classVect <- colnames(measureData) %in% array2
   samResult <- sam(measureData, classVect)
   sigDelta <- findMinDelta(samResult)
   samSummary <- summary(samResult, delta=sigDelta)
@@ -81,3 +81,16 @@ plotSamFigures <- function(samList, measureData,
   dev.off()
 }
 
+exportSigProbeTable <- function(samList, fileName='test', 
+  dirName='Tables/') {
+  
+  # Exports significant sam probes to a tab-deliniated text file
+
+  exportTable <- samList$samProbes
+  exportTable$uniqueProbeIDs <- rownames(exportTable)
+
+  write.table(x=exportTable, 
+    file=paste(dirName, fileName, 'SigProbes.txt', sep=''), 
+    col.names=TRUE,  quote=FALSE, row.names=FALSE, sep='\t')
+
+}

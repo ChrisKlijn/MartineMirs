@@ -8,6 +8,7 @@
 # To Do
 # define comparison groups
 # eliminate non-variant mirs
+# possibly remove the human/rat-only mirs
 # code to plot SAM plot and a heatmap of the significant probes
 # see if replicate probes are present in the list
 
@@ -30,10 +31,20 @@ load('mirM_rawData.Rda')
 # do a sample sam analysis
 # Check all lung mets vs. their donor tumors
 
+# Lung analysis
 arrayLung <- subset(hybInfo, sampleType == 'Lung met')$Array
 arrayNonLung <- subset(hybInfo, sampleType != 'Lung met')$Array
-
 lungResults <- doMirSamAnalysis(arrayLung, arrayNonLung, 
   measureData, probeInfo)
-plotSamFigures(lungResults, measureData)
+plotSamFigures(lungResults, measureData, fileName='lung',
+  legendText=c('Lung Met vs. Primary', 'Other Hyb'))
+
+# LN analysis
+arrayLN<- subset(hybInfo, grepl('LN', sampleType))$Array
+arrayNonLN <- subset(hybInfo, !grepl('LN', sampleType))$Array
+LNResults <- doMirSamAnalysis(arrayLN, arrayNonLN, 
+  measureData, probeInfo)
+plotSamFigures(LNResults, measureData, fileName='LN',
+  legendText=c('LN Met vs. Primary', 'Other Hyb'))
+
 

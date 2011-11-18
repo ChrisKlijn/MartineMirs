@@ -49,14 +49,16 @@ doMirSamAnalysis <- function(array1, array2,
   returnResult <- list(delta=sigDelta,
     samResult=samResult,
     samSummary=samSummary,
-    samProbes=samProbes)
+    samProbes=samProbes,
+    classVect=classVect)
 
   return(returnResult)
   
 }
 
 plotSamFigures <- function(samList, measureData,
-  dirName='Figures/', fileName='test') {
+  dirName='Figures/', fileName='test',
+  legendText=c('class 1', 'class 2')) {
   
   # Plots SAM plot and a heatmap into a pdf file
   # input is a samResult list
@@ -72,7 +74,9 @@ plotSamFigures <- function(samList, measureData,
 
   heatmap.2(measureData[rownames(samList$samProbes),], 
     scale='none', trace='none',
-    col=heatCols, margin=c(7,10))
+    col=heatCols, margin=c(7,10), cexRow=.8, cexCol=.8,
+    ColSideColors=classCol[samList$classVect + 1])
+  legend('topright', legend=legendText, fill=classCol)
   
   dev.off()
 }
